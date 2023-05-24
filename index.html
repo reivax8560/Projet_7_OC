@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Les petits plats</title>
+    <meta charset="utf-8">
+    <script src="https://kit.fontawesome.com/55e7772dc0.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body>
+    <header>
+        <img src="./assets/logo.png" class="logo" alt="logo" />
+
+        <div id="searchArea">
+            <input type="search" id="searchBar" placeholder="Rechercher une recette">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div id="advancedSearchArea">
+
+            <div class="tagArea">
+                <input id="ingredientsInput" type="text" list="ingredientsList" class="tagInput"
+                    placeholder="ingrédients">
+                <i class="fa-solid fa-chevron-down chevron"></i>
+                <!-- <i class="fa-solid fa-chevron-up"></i> -->
+                <ul id="ingredientsBox" class="tagsBox"></ul>
+            </div>
+            <div class="tagArea">
+                <input id="applianceInput" type="text" list="applianceList" class="tagInput" placeholder="appareils">
+                <i class="fa-solid fa-chevron-down chevron"></i>
+                <!-- <i class="fa-solid fa-chevron-up"></i> -->
+                <ul id="applianceBox" class="tagsBox"></ul>
+            </div>
+            <div class="tagArea">
+                <input id="ustensilsInput" type="text" list="ustensilsList" class="tagInput" placeholder="ustensiles">
+                <i class="fa-solid fa-chevron-down chevron"></i>
+                <!-- <i class="fa-solid fa-chevron-up"></i> -->
+                <ul id="ustensilsBox" class="tagsBox"></ul>
+            </div>
+
+        </div>
+    </header>
+
+    <main id="main">
+        <div id="recipes_section"></div>
+    </main>
+
+    <script src="./scripts/recipes.js"></script>
+    <script src="./scripts/recipesFactory.js"></script>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>

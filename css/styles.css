@@ -1,0 +1,199 @@
+body {
+    margin: 0;
+    padding: 0 80px;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    width: 250px;
+    margin: 30px auto 20px auto;
+}
+/* ******************************* */
+#searchArea {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+#searchBar {
+    background: #E7E7E7;
+    color: #C7BEBE;
+    height: 65px;
+    border: none;
+    border-radius: 5px;
+    padding: 0 20px;
+    width: 100%;
+    position: relative;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#searchArea i {
+    position: absolute;
+    right: 100px;
+    font-size: 24px;
+}
+/* ******************************* */
+#advancedSearchArea {
+    display: flex;
+    margin-bottom: 30px;
+}
+.tagArea {
+    display: flex;
+    flex-direction: column;
+    margin-right: 40px;
+    position: relative;
+}
+.tagInput {
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    height: 65px;
+    padding: 0 10px;
+}
+.tagInput::placeholder {
+    color: white;
+}
+.chevron {
+    position: absolute;
+    right: 10px;
+    top: 25px;
+    color: white;
+    font-weight: 700;
+}
+.tagsBox {
+    list-style: none;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 0 0 5px 5px;
+    margin: -4px 0 0 0;
+    padding: 0 10px 10px 10px;
+    display: flex;
+    flex-flow: column wrap;
+    max-height: 240px;
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr); */
+}
+
+#ingredientsInput {
+    background: #3282F7;
+}
+#applianceInput {
+    background: #68D9A4;
+}
+#ustensilsInput {
+    background: #ED6454;
+}
+#ingredientsBox {
+    background: #3282F7;
+    width: 560px;
+}
+#applianceBox {
+    background: #68D9A4;
+    /* width: 360px; */
+}
+#ustensilsBox {
+    background: #ED6454;
+    width: 560px;
+}
+.tagItem {
+    margin-right: 50px;
+}
+/* ********************* SECTION RECETTES ********************* */
+#recipes_section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 100px;
+}
+.recipeCard {
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    height: 300px;
+    /* box-sizing: border-box; */
+}
+
+.picture {
+    height: 50%;
+    background: #C7BEBE;
+    border-radius: 5px 5px 0 0;
+}
+/* ********************* TEXTE VIGNETTE ******************** */
+.textArea {
+    height: 50%;
+    background: #E7E7E7;
+    border-radius: 0 0 5px 5px;
+    padding: 15px 20px;
+    /* box-sizing: border-box; */
+}
+/*******************************/
+.titleDIv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.titleDIv h2 {
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    width: 220px;
+}
+.titleDIv i {
+    position: relative;
+    right: -10px;
+}
+.titleDIv p {
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+/*******************************/
+.descriptionDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* box-sizing: border-box; */
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
+}
+.ingredientsDiv {
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    width: 150px;
+    height: 110px;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ingredient {
+    margin: 0;
+}
+.description {
+    width: 160px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    -webkit-line-clamp: 7;
+    /* white-space: nowrap; */
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    /* word-break: break-all; */
+}
