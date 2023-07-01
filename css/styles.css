@@ -12,15 +12,17 @@ header {
     width: 250px;
     margin: 30px auto 20px auto;
 }
+
 /* ******************************* */
 #searchArea {
     display: flex;
     align-items: center;
     margin-bottom: 30px;
 }
+
 #searchBar {
     background: #E7E7E7;
-    color: #C7BEBE;
+    color: black;
     height: 65px;
     border: none;
     border-radius: 5px;
@@ -29,6 +31,11 @@ header {
     position: relative;
     font-family: 'Lato', sans-serif;
     font-size: 18px;
+    font-weight: 700;
+}
+
+#searchBar::placeholder {
+    color: #C7BEBE;
     font-weight: 400;
 }
 
@@ -37,17 +44,71 @@ header {
     right: 100px;
     font-size: 24px;
 }
-/* ******************************* */
+
+/* ************************************** ZONE DE RECHERCHE AVANCEE ********************************** */
+
+#selectedTagsArea {
+    display: flex;
+    margin-bottom: 20px;
+}
+
 #advancedSearchArea {
     display: flex;
     margin-bottom: 30px;
 }
+
+/* ********************* BLOC DE TAGS (BTN + INPUT + TAGBOX) ******************** */
+
 .tagArea {
     display: flex;
     flex-direction: column;
     margin-right: 40px;
     position: relative;
+    min-width: 150px;
+    min-height: 50px;
+    /* box-sizing: border-box; */
 }
+
+/* ********************* TAG BUTTON ******************** */
+
+.inputBtn {
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    height: 65px;
+    padding: 0 10px;
+    width: 170px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* display: none; */
+}
+
+.inputBtn_ingr {
+    background: #3282F7;
+    position: absolute;
+}
+
+.inputBtn_appli {
+    background: #68D9A4;
+    position: absolute;
+}
+
+.inputBtn_ust {
+    background: #ED6454;
+    position: absolute;
+}
+
+/* ********************* TAG INPUT ******************** */
+
+/* .inputBox {
+} */
+
 .tagInput {
     color: white;
     font-family: 'Lato', sans-serif;
@@ -58,63 +119,130 @@ header {
     height: 65px;
     padding: 0 10px;
 }
+
 .tagInput::placeholder {
     color: white;
-}
-.chevron {
-    position: absolute;
-    right: 10px;
-    top: 25px;
-    color: white;
-    font-weight: 700;
-}
-.tagsBox {
-    list-style: none;
-    color: white;
-    font-family: 'Lato', sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    border-radius: 0 0 5px 5px;
-    margin: -4px 0 0 0;
-    padding: 0 10px 10px 10px;
-    display: flex;
-    flex-flow: column wrap;
-    max-height: 240px;
-    /* display: grid;
-    grid-template-columns: repeat(3, 1fr); */
 }
 
 #ingredientsInput {
     background: #3282F7;
+    display: none;
 }
+
 #applianceInput {
     background: #68D9A4;
+    display: none;
 }
+
 #ustensilsInput {
     background: #ED6454;
+    display: none;
 }
+
+.fa-chevron-down {
+    color: white;
+    font-weight: 700;
+}
+
+.fa-chevron-up {
+    color: white;
+    font-weight: 700;
+    position: absolute;
+    right: 10px;
+    top: 25px;
+    display: none;
+}
+
+/* ********************* TAG BOX ******************** */
+
+.tagsBox {
+    list-style: none;
+    border-radius: 0 0 5px 5px;
+    margin: -4px 0 0 0;
+    padding: 0 10px 10px 10px;
+    overflow: auto;
+    max-height: 265px;
+    /* max-width: 700px; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
 #ingredientsBox {
     background: #3282F7;
-    width: 560px;
+    display: none;
 }
+
 #applianceBox {
     background: #68D9A4;
-    /* width: 360px; */
+    display: none;
 }
+
 #ustensilsBox {
     background: #ED6454;
-    width: 560px;
+    display: none;
 }
-.tagItem {
-    margin-right: 50px;
+
+.tagBtn {
+    margin-right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    padding: 3px 0;
+    white-space: nowrap;
+    cursor: pointer;
 }
+
+.tagBtn_selected {
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: left;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    list-style: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.close-icon {
+    margin-left: 10px;
+}
+
+.ingr_color {
+    background: #3282F7;
+}
+
+.appli_color {
+    background: #68D9A4;
+}
+
+.ust_color {
+    background: #ED6454;
+}
+
 /* ********************* SECTION RECETTES ********************* */
+#noResultMessage {
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    display: none;
+}
 #recipes_section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     margin-bottom: 100px;
 }
+
 .recipeCard {
     text-decoration: none;
     color: black;
@@ -128,6 +256,7 @@ header {
     background: #C7BEBE;
     border-radius: 5px 5px 0 0;
 }
+
 /* ********************* TEXTE VIGNETTE ******************** */
 .textArea {
     height: 50%;
@@ -136,6 +265,7 @@ header {
     padding: 15px 20px;
     /* box-sizing: border-box; */
 }
+
 /*******************************/
 .titleDIv {
     display: flex;
@@ -143,6 +273,7 @@ header {
     align-items: center;
     margin-bottom: 15px;
 }
+
 .titleDIv h2 {
     font-family: 'Lato', sans-serif;
     font-size: 18px;
@@ -150,16 +281,19 @@ header {
     margin: 0;
     width: 220px;
 }
+
 .titleDIv i {
     position: relative;
     right: -10px;
 }
+
 .titleDIv p {
     font-family: 'Lato', sans-serif;
     font-size: 18px;
     font-weight: 700;
     margin: 0;
 }
+
 /*******************************/
 .descriptionDiv {
     display: flex;
@@ -169,6 +303,7 @@ header {
     /* overflow: hidden;
     text-overflow: ellipsis; */
 }
+
 .ingredientsDiv {
     font-family: 'Lato', sans-serif;
     font-size: 12px;
@@ -179,9 +314,11 @@ header {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .ingredient {
     margin: 0;
 }
+
 .description {
     width: 160px;
     font-family: 'Roboto', sans-serif;

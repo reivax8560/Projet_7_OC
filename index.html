@@ -20,25 +20,40 @@
             <input type="search" id="searchBar" placeholder="Rechercher une recette">
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
+        <div id="selectedTagsArea"></div>
 
         <div id="advancedSearchArea">
-
             <div class="tagArea">
-                <input id="ingredientsInput" type="text" list="ingredientsList" class="tagInput"
-                    placeholder="ingrédients">
-                <i class="fa-solid fa-chevron-down chevron"></i>
+                <button type="button" class="inputBtn inputBtn_ingr" id="ingredientsBtn">
+                    Ingrédients
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <!-- <div class="inputBox"></div> -->
+                <input type="search" id="ingredientsInput" list="ingredientsList" class="tagInput"
+                    placeholder="Ingrédients">
+                <i class="fa-solid fa-chevron-up"></i>
                 <!-- <i class="fa-solid fa-chevron-up"></i> -->
                 <ul id="ingredientsBox" class="tagsBox"></ul>
             </div>
+
             <div class="tagArea">
-                <input id="applianceInput" type="text" list="applianceList" class="tagInput" placeholder="appareils">
-                <i class="fa-solid fa-chevron-down chevron"></i>
+                <button type="button" class="inputBtn inputBtn_appli" id="applianceBtn">
+                    Appareils
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <input type="search" id="applianceInput" list="applianceList" class="tagInput" placeholder="Appareils">
+                <i class="fa-solid fa-chevron-up"></i>
                 <!-- <i class="fa-solid fa-chevron-up"></i> -->
                 <ul id="applianceBox" class="tagsBox"></ul>
             </div>
+
             <div class="tagArea">
-                <input id="ustensilsInput" type="text" list="ustensilsList" class="tagInput" placeholder="ustensiles">
-                <i class="fa-solid fa-chevron-down chevron"></i>
+                <button type="button" class="inputBtn inputBtn_ust" id="ustensilsBtn">
+                    Ustensiles
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <input type="search" id="ustensilsInput" list="ustensilsList" class="tagInput" placeholder="Ustensiles">
+                <i class="fa-solid fa-chevron-up"></i>
                 <!-- <i class="fa-solid fa-chevron-up"></i> -->
                 <ul id="ustensilsBox" class="tagsBox"></ul>
             </div>
@@ -48,6 +63,8 @@
 
     <main id="main">
         <div id="recipes_section"></div>
+        <p id="noResultMessage">Aucune recette ne correspond à vos critères… vous pouvez chercher « tarte aux pommes
+            », « poisson », etc.</p>
     </main>
 
     <script src="./scripts/recipes.js"></script>
