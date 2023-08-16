@@ -50,7 +50,6 @@ function checkIngredients(ingredients) {
     let output = false;
     ingredients.forEach(ingredient => {
         if (ingredient.ingredient.toLowerCase().includes(searchBar.value.toLowerCase())) {
-            // console.log(ingredient.ingredient.toLowerCase())
             output = true;
         }
     })
@@ -76,13 +75,26 @@ searchBar.addEventListener('input', () => {
     ///////////////////////////////////////////////// A PARTIR DE 3 CARACTERES => FILTRER RECETTES & TAGS
     if (searchBar.value.length > 2) {
         noResultMessage.style.display = 'none';
-        filteredRecipes = recipes.filter(searchByText);
-        const filterTags = inititems(filteredRecipes);
-        filteredIngredients = filterTags._ingredients;
-        filteredAppliance = filterTags._appliances;
-        filteredUstensils = filterTags._ustensils;
-        recipesSection.innerHTML = "";
-        displayRecipes(filteredRecipes, recipesSection);
+        //////////////////////////////////// SI SUPPRESSION DE CARACTERES => FILTRER A PARTIR DES RECETTES GLOBALES
+        if (searchBar.value.length < caractersCount) {
+            filteredRecipes = recipes.filter(searchByText);
+            const filterTags = inititems(filteredRecipes);
+            filteredIngredients = filterTags._ingredients;
+            filteredAppliance = filterTags._appliances;
+            filteredUstensils = filterTags._ustensils;
+            recipesSection.innerHTML = "";
+            displayRecipes(filteredRecipes, recipesSection);
+        }
+        //////////////////////////////////// SI AJOUT DE CARACTERES => FILTRER filteredRecipes AU FUR ET A MESURE
+        else {
+            filteredRecipes = filteredRecipes.filter(searchByText);
+            const filterTags = inititems(filteredRecipes);
+            filteredIngredients = filterTags._ingredients;
+            filteredAppliance = filterTags._appliances;
+            filteredUstensils = filterTags._ustensils;
+            recipesSection.innerHTML = "";
+            displayRecipes(filteredRecipes, recipesSection);
+        }
         //////////////////////////////////// SI AUCUN RESULTAT => MESSAGE ERREUR
         if (filteredRecipes.length === 0) {
             noResultMessage.style.display = 'block';

@@ -26,16 +26,16 @@ function displayRecipes(recipes, recipesSection) {
         const ingredientsDiv = document.createElement('div');
         ingredientsDiv.className = "ingredientsDiv";
         ////////////////////////////////////////////////// INGREDIENTS RECETTE
-        recipe.ingredients.forEach(element => {
+        recipe.ingredients.forEach(ingredients => {
             const ingredient = document.createElement('p');
-            ingredient.append(element.ingredient);
-            if (element.quantity) {
+            ingredient.append(ingredients.ingredient);
+            if (ingredients.quantity) {
                 ingredient.append(" : ");
-                ingredient.append(element.quantity);
+                ingredient.append(ingredients.quantity);
             }
-            if (element.unit) {
+            if (ingredients.unit) {
                 ingredient.append(" ");
-                ingredient.append(element.unit);
+                ingredient.append(ingredients.unit);
             }
             ingredient.className = "ingredient";
             ingredientsDiv.append(ingredient);
@@ -74,51 +74,51 @@ let ustensilsTags = [];
 function displayItems(items, itemsBox) {
     itemsBox.innerHTML = "";
     ///////////////////////////////////////////////// CREATION DE CHAQUE ITEM
-    items.forEach(element => {
-        const item = document.createElement('li');
-        item.className = "item";
-        item.textContent = element;
-        itemsBox.append(item);
+    items.forEach(item => {
+        const DOMitem = document.createElement('li');
+        DOMitem.className = "item";
+        DOMitem.textContent = item;
+        itemsBox.append(DOMitem);
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////// FILTRE PAR ITEM ///////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////// AU "CLICK" SUR UN ITEM
-        item.addEventListener('click', () => {
+        DOMitem.addEventListener('click', () => {
             noResultMessage.style.display = 'none';
-            displayTag(element, itemsBox);
+            displayTag(item, itemsBox);
 
             const tempFilteredRecipes = [];
             ///////////////////////////////// ITEM INGREDIENT
             if (itemsBox == ingredientsBox) {
                 filteredRecipes.forEach(recipe => {
                     recipe.ingredients.forEach(ingredient => {
-                        if (ingredient.ingredient.toLowerCase() === element) {
+                        if (ingredient.ingredient.toLowerCase() === item) {
                             tempFilteredRecipes.push(recipe);
                         }
                     })
                 })
-                ingredientsTags.push(element);
+                ingredientsTags.push(item);
             }
             //////////////////////////////////// ITEM APPAREIL
             else if (itemsBox == applianceBox) {
                 filteredRecipes.forEach(recipe => {
-                    if (recipe.appliance.toLowerCase() === element) {
+                    if (recipe.appliance.toLowerCase() === item) {
                         tempFilteredRecipes.push(recipe);
                     }
                 })
-                applianceTags.push(element);
+                applianceTags.push(item);
             }
             //////////////////////////////////// ITEM USTENSILE
             else if (itemsBox == ustensilsBox) {
                 filteredRecipes.forEach(recipe => {
                     recipe.ustensils.forEach(ustensil => {
-                        if (ustensil.toLowerCase() === element) {
+                        if (ustensil.toLowerCase() === item) {
                             tempFilteredRecipes.push(recipe);
                         }
                     })
                 })
-                ustensilsTags.push(element);
+                ustensilsTags.push(item);
             }
             if (tempFilteredRecipes.length === 0) {
                 noResultMessage.style.display = 'block';
@@ -211,7 +211,6 @@ function displayTag(item, itemsBox) {
 
         //////////////////////////////////// SI SEARCHBAR > 2 => FILTRER SUR LE MOT CLÉ
         if (searchBar.value.length > 2) {
-            // tempFilteredRecipes = filterByText(tempFilteredRecipes, searchBar.value.toLowerCase());
             tempFilteredRecipes = recipes.filter(searchByText);
         }
         /////////// SUPPR DOUBLONS
