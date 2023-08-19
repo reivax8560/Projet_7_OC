@@ -1,6 +1,7 @@
-const main = document.querySelector('main');
-const nbRecettes = document.createElement('h2');
-main.prepend(nbRecettes);
+const main = document.querySelector('main');                                                // à supprimer
+const nbRecettes = document.createElement('h2');                                            // à supprimer
+main.prepend(nbRecettes);                                                                   // à supprimer
+
 ///////////////////////////////////////////////////////////////// AFFICHAGE RECETTES ////////////////////////////////////////////////////////////////
 function displayRecipes(recipes, recipesSection) {
     recipes.forEach(recipe => {
@@ -64,13 +65,9 @@ function displayRecipes(recipes, recipesSection) {
         recipesSection.append(recipeCard);
     });
 
-    nbRecettes.textContent = `${recipes.length} recettes`;
+    nbRecettes.textContent = `${recipes.length} recettes`;                                          // à supprimer
 }
 /////////////////////////////////////////////////////////////////// AFFICHAGE ITEMS ////////////////////////////////////////////////////////////////
-let ingredientsTags = [];
-let applianceTags = [];
-let ustensilsTags = [];
-
 function displayItems(items, itemsBox) {
     itemsBox.innerHTML = "";
     ///////////////////////////////////////////////// CREATION DE CHAQUE ITEM
@@ -79,54 +76,56 @@ function displayItems(items, itemsBox) {
         DOMitem.className = "item";
         DOMitem.textContent = item;
         itemsBox.append(DOMitem);
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////// FILTRE PAR ITEM ///////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ///////////////////////////////////////////////// AU "CLICK" SUR UN ITEM
+        /////////////////////////////////////////////////////////// AU "CLICK" SUR UN ITEM => FILTRER RECETTES
         DOMitem.addEventListener('click', () => {
             noResultMessage.style.display = 'none';
             displayTag(item, itemsBox);
-
-            const tempFilteredRecipes = [];
-            ///////////////////////////////// ITEM INGREDIENT
+            //////////////////////////////////////////// ITEM INGREDIENT
+            function searchByIngredients(recipe) {
+                for (let i = 0; i < recipe.ingredients.length; i++) {
+                    if (recipe.ingredients[i].ingredient.toLowerCase() === item) {
+                        return true;
+                    }
+                }
+            }
             if (itemsBox == ingredientsBox) {
-                filteredRecipes.forEach(recipe => {
-                    recipe.ingredients.forEach(ingredient => {
-                        if (ingredient.ingredient.toLowerCase() === item) {
-                            tempFilteredRecipes.push(recipe);
-                        }
-                    })
-                })
+                filteredRecipes = filteredRecipes.filter(searchByIngredients);
                 ingredientsTags.push(item);
             }
-            //////////////////////////////////// ITEM APPAREIL
-            else if (itemsBox == applianceBox) {
-                filteredRecipes.forEach(recipe => {
-                    if (recipe.appliance.toLowerCase() === item) {
-                        tempFilteredRecipes.push(recipe);
-                    }
-                })
+            /////////////////////////////////////////// ITEM APPAREIL
+            function searchByAppliance(recipe) {
+                if (recipe.appliance.toLowerCase() === item) {
+                    return true;
+                }
+            }
+            if (itemsBox == applianceBox) {
+                filteredRecipes = filteredRecipes.filter(searchByAppliance);
                 applianceTags.push(item);
             }
-            //////////////////////////////////// ITEM USTENSILE
-            else if (itemsBox == ustensilsBox) {
-                filteredRecipes.forEach(recipe => {
-                    recipe.ustensils.forEach(ustensil => {
-                        if (ustensil.toLowerCase() === item) {
-                            tempFilteredRecipes.push(recipe);
-                        }
-                    })
-                })
+            ////////////////////////////////////////// ITEM USTENSILE
+            function searchByUstensils(recipe) {
+                for (let j = 0; j < recipe.ustensils.length; j++) {
+                    if (recipe.ustensils[j].toLowerCase() === item) {
+                        return true;
+                    }
+                }
+            }
+            if (itemsBox == ustensilsBox) {
+                filteredRecipes = filteredRecipes.filter(searchByUstensils);
                 ustensilsTags.push(item);
             }
-            if (tempFilteredRecipes.length === 0) {
+            ///////////////////////////////////////// SI AUCUN RESULTAT => MESSAGE ERREUR
+            if (filteredRecipes.length === 0) {
                 noResultMessage.style.display = 'block';
             }
-            filteredRecipes = [...tempFilteredRecipes];
+            ////////////////////////////////////////////// ACTUALISATION AFFICHAGE
             recipesSection.innerHTML = "";
             displayRecipes(filteredRecipes, recipesSection);
-            inititems(filteredRecipes);
+            const filterTags = inititems(filteredRecipes);
+            filteredIngredients = filterTags._ingredients;
+            filteredAppliance = filterTags._appliances;
+            filteredUstensils = filterTags._ustensils;
         })
     })
 }
@@ -151,16 +150,17 @@ function displayTag(item, itemsBox) {
         tagBtn.dataset.type = 'ustensil';
     }
     tagBtn.append(item, deleteTagIcon);
-
     ///////////////////////////////////////////////// INSERTION DANS LA ZONE DES TAGS
     const selectedTagsArea = document.getElementById('selectedTagsArea');
     selectedTagsArea.append(tagBtn);
 
-    /////////////////////////////////////////////////////// AU "CLICK" POUR SUPPRIMER UN TAG ///////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////// AU "CLICK" POUR SUPPRIMER UN TAG => VERIF DES FILTRES ENCORE ACTIFS
     deleteTagIcon.addEventListener('click', () => {
-        ////////////////////////////////////// SUPPRESSION DU BOUTON
+        noResultMessage.style.display = 'none';
+        filteredRecipes = [];
+        ////////////////////////////////////////////////////// SUPPRESSION DU TAG
         selectedTagsArea.removeChild(tagBtn);
-        ///////////////// SUPPRESSION DE L'ITEM DANS LE ARRAY CORRESPONDANT
+        /////////////////////////// SUPPRESSION DE L'ITEM DANS LE ARRAY CORRESPONDANT
         if (itemsBox == ingredientsBox) {
             ingredientsTags.splice(ingredientsTags.indexOf(item.textContent), 1);
         }
@@ -170,59 +170,60 @@ function displayTag(item, itemsBox) {
         else if (itemsBox == ustensilsBox) {
             ustensilsTags.splice(ustensilsTags.indexOf(item.textContent), 1);
         }
-        //////////////////////////////////////////////////////////////////////////
-        noResultMessage.style.display = 'none';
-        let tempFilteredRecipes = [];
+
         let noFilter = true;
-        //////////////////////////////////// SI TAG INGREDIENT ACTIF => REFILTRER
+        //////////////////////////////////// SI TAG INGREDIENT ACTIF
         if (ingredientsTags.length > 0) {
             recipes.forEach(recipe => {
                 recipe.ingredients.forEach(ingredients => {
                     if (ingredientsTags.includes(ingredients.ingredient.toLowerCase())) {
-                        tempFilteredRecipes.push(recipe);
+                        filteredRecipes.push(recipe);
                     }
                 })
             })
             noFilter = false;
         }
-        //////////////////////////////////// SI TAG APPAREIL ACTIF => REFILTRER
+        //////////////////////////////////// SI TAG APPAREIL ACTIF
         if (applianceTags.length > 0) {
             recipes.forEach(recipe => {
                 if (applianceTags.includes(recipe.appliance.toLowerCase())) {
-                    tempFilteredRecipes.push(recipe);
+                    filteredRecipes.push(recipe);
                 }
             })
             noFilter = false;
         }
-        //////////////////////////////////// SI TAG USTENSILE ACTIF => REFILTRER
+        //////////////////////////////////// SI TAG USTENSILE ACTIF
         if (ustensilsTags.length > 0) {
             recipes.forEach(recipe => {
                 recipe.ustensils.forEach(ustensil => {
                     if (ustensilsTags.includes(ustensil.toLowerCase())) {
-                        tempFilteredRecipes.push(recipe);
+                        filteredRecipes.push(recipe);
                     }
                 })
             })
             noFilter = false;
         }
+        ///////////////////////////////// SI PAS DE TAG ACTIF => RECUP RECETTES GLOBALES
         if (noFilter) {
-            tempFilteredRecipes = [...recipes];
+            filteredRecipes = [...recipes];
         }
-
-        //////////////////////////////////// SI SEARCHBAR > 2 => FILTRER SUR LE MOT CLÉ
+        //////////////////////////////////// SI RECHERCHE PRINCIPALE ACTIVE => FILTRER SUR LE MOT CLÉ
         if (searchBar.value.length > 2) {
-            tempFilteredRecipes = recipes.filter(searchByText);
+            filteredRecipes = filteredRecipes.filter(byMainSearch);
         }
         /////////// SUPPR DOUBLONS
-        tempFilteredRecipes = [...new Set(tempFilteredRecipes)];
-        ///////////////////////////////////////////////////// ACTUALISATION DE L'AFFICHAGE
-        if (tempFilteredRecipes.length === 0) {
+        filteredRecipes = [...new Set(filteredRecipes)];
+        ///////////////////////////////////////// SI AUCUN RESULTAT => MESSAGE ERREUR
+        if (filteredRecipes.length === 0) {
             noResultMessage.style.display = 'block';
         }
-        filteredRecipes = [...tempFilteredRecipes];
+        ///////////////////////////////////////////////////// ACTUALISATION DE L'AFFICHAGE
         recipesSection.innerHTML = "";
         displayRecipes(filteredRecipes, recipesSection);
-        inititems(filteredRecipes);
+        const filterTags = inititems(filteredRecipes);
+        filteredIngredients = filterTags._ingredients;
+        filteredAppliance = filterTags._appliances;
+        filteredUstensils = filterTags._ustensils;
     })
 }
 
