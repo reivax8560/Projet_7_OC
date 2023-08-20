@@ -113,12 +113,13 @@ function displayItems(items, itemsBox) {
                 }
                 ustensilsTags.push(items[i]);
             }
+            ///////////////////////////////////////////////
+            filteredRecipes = [...tempFilteredRecipes];
             ///////////////////////////////////////// SI AUCUN RESULTAT => MESSAGE ERREUR
             if (filteredRecipes.length === 0) {
                 noResultMessage.style.display = 'block';
             }
             ////////////////////////////////////////////// ACTUALISATION AFFICHAGE
-            filteredRecipes = [...tempFilteredRecipes];
             recipesSection.innerHTML = "";
             displayRecipes(filteredRecipes, recipesSection);
             const filterTags = inititems(filteredRecipes);
@@ -203,22 +204,24 @@ function displayTag(item, itemsBox) {
             }
             noFilter = false;
         }
+        ///////////////////////////////////////////////
+        filteredRecipes = [...tempFilteredRecipes];
         ///////////////////////////////// SI PAS DE TAG ACTIF => RECUP RECETTES GLOBALES
         if (noFilter) {
-            tempFilteredRecipes = [...recipes];
+            filteredRecipes = [...recipes];
         }
         //////////////////////////////////// SI RECHERCHE PRINCIPALE ACTIVE => FILTRER SUR LE MOT CLÉ
         if (searchBar.value.length > 2) {
-            tempFilteredRecipes = byMainSearch(tempFilteredRecipes);
+            filteredRecipes = byMainSearch(filteredRecipes);
         }
         /////////// SUPPR DOUBLONS
-        tempFilteredRecipes = [...new Set(tempFilteredRecipes)];
+        filteredRecipes = [...new Set(filteredRecipes)];
         ///////////////////////////////////////// SI AUCUN RESULTAT => MESSAGE ERREUR
-        if (tempFilteredRecipes.length === 0) {
+        if (filteredRecipes.length === 0) {
             noResultMessage.style.display = 'block';
         }
         ///////////////////////////////////////////////////// ACTUALISATION DE L'AFFICHAGE
-        filteredRecipes = [...tempFilteredRecipes];
+
 
         recipesSection.innerHTML = "";
         displayRecipes(filteredRecipes, recipesSection);
