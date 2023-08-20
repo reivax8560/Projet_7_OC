@@ -76,7 +76,6 @@ function displayItems(items, itemsBox) {
         item.className = "item";
         item.textContent = items[i];
         itemsBox.append(item);
-
         /////////////////////////////////////////////////////////// AU "CLICK" SUR UN ITEM => FILTRER RECETTES
         item.addEventListener('click', () => {
             noResultMessage.style.display = 'none';
@@ -150,11 +149,9 @@ function displayTag(item, itemsBox) {
         tagBtn.dataset.type = 'ustensil';
     }
     tagBtn.append(item, deleteTagIcon);
-
     ///////////////////////////////////////////////// INSERTION DANS LA ZONE DES TAGS
     const selectedTagsArea = document.getElementById('selectedTagsArea');
     selectedTagsArea.append(tagBtn);
-
     ////////////////////////////////////////////////////////////////// AU "CLICK" POUR SUPPRIMER UN TAG => VERIF DES FILTRES ENCORE ACTIFS
     deleteTagIcon.addEventListener('click', () => {
         noResultMessage.style.display = 'none';
@@ -171,7 +168,7 @@ function displayTag(item, itemsBox) {
         else if (itemsBox == ustensilsBox) {
             ustensilsTags.splice(ustensilsTags.indexOf(item.textContent), 1);
         }
-
+        /////////////////////////////
         let noFilter = true;
         //////////////////////////////////// SI TAG INGREDIENT ACTIF
         if (ingredientsTags.length > 0) {
@@ -221,8 +218,6 @@ function displayTag(item, itemsBox) {
             noResultMessage.style.display = 'block';
         }
         ///////////////////////////////////////////////////// ACTUALISATION DE L'AFFICHAGE
-
-
         recipesSection.innerHTML = "";
         displayRecipes(filteredRecipes, recipesSection);
         const filterTags = inititems(filteredRecipes);
@@ -231,4 +226,3 @@ function displayTag(item, itemsBox) {
         filteredUstensils = filterTags._ustensils;
     })
 }
-

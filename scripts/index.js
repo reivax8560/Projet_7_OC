@@ -85,7 +85,6 @@ searchBar.addEventListener('input', () => {
         noResultMessage.style.display = 'none';
         ///////////////////////////////////////////////////////////////////// SI SUPPRESSION DE CARACTERES
         if (searchBar.value.length < caractersCount) {
-
             filteredRecipes = [];
             let noFilter = true;
             //////////////////////////////////// RECUPERATION DES TAGS INGREDIENT ACTIFS
@@ -124,7 +123,7 @@ searchBar.addEventListener('input', () => {
                 filteredRecipes = [...recipes];
             }
             //////////////////////////////// FILTRE SUR LA RECHERCHE PRINCIPALE
-            filteredRecipes = byMainSearch(recipes);
+            filteredRecipes = byMainSearch(filteredRecipes);
             ////////////////////////////////////// SUPPR DOUBLONS
             filteredRecipes = [...new Set(filteredRecipes)];
         }
