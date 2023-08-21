@@ -209,7 +209,7 @@ function displayTag(item, itemsBox) {
         }
         //////////////////////////////////// SI RECHERCHE PRINCIPALE ACTIVE => FILTRER SUR LE MOT CLÉ
         if (searchBar.value.length > 2) {
-            filteredRecipes = byMainSearch(filteredRecipes);
+            filteredRecipes = filterByMainSearch(filteredRecipes);
         }
         /////////// SUPPR DOUBLONS
         filteredRecipes = [...new Set(filteredRecipes)];

@@ -68,7 +68,7 @@ function checkIngredients(ingredients) {
     }
     return false;
 }
-function byMainSearch(recipes) {
+function filterByMainSearch(recipes) {
     const recipesOutput = [];
     for (let i = 0; i < recipes.length; i++) {
         const recipe = recipes[i];
@@ -123,14 +123,14 @@ searchBar.addEventListener('input', () => {
                 filteredRecipes = [...recipes];
             }
             //////////////////////////////// FILTRE SUR LA RECHERCHE PRINCIPALE
-            filteredRecipes = byMainSearch(filteredRecipes);
+            filteredRecipes = filterByMainSearch(filteredRecipes);
             ////////////////////////////////////// SUPPR DOUBLONS
             filteredRecipes = [...new Set(filteredRecipes)];
         }
         ///////////////////////////////////////////////////////////////////////////// SI AJOUT DE CARACTERES
         else {
             //////////////////////////////// FILTRE SUR LA RECHERCHE PRINCIPALE
-            filteredRecipes = byMainSearch(filteredRecipes);
+            filteredRecipes = filterByMainSearch(filteredRecipes);
             caractersCount = searchBar.value.length;
         }
         ///////////////////////////////////////////////////////////////// SI AUCUN RESULTAT => MESSAGE ERREUR
@@ -234,52 +234,36 @@ ustensilsChevron.addEventListener('click', () => {
     ustensilsBox.style.display = 'none';
     ustensilsChevron.style.display = 'none';
 })
-/////////////////////////////////////// FONCTIONS DE RECHERCHE PAR ITEMS
-function filterByIngredients(searchIngredients, searchText) {
-    const output = [];
-    for (let i = 0; i < searchIngredients.length; i++) {
-        const ingredient = searchIngredients[i];
-        if (ingredient.includes(searchText)) {
-            output.push(ingredient);
-        }
-    }
-    return output;
-}
-function filterByAppliance(searchAppliance, searchText) {
-    const output = [];
-    for (let i = 0; i < searchAppliance.length; i++) {
-        const appliance = searchAppliance[i];
-        if (appliance.includes(searchText)) {
-            output.push(appliance);
-        }
-    }
-    return output;
-}
-function filterByUstensils(searchUstensils, searchText) {
-    const output = [];
-    for (let i = 0; i < searchUstensils.length; i++) {
-        const ustensil = searchUstensils[i];
-        if (ustensil.includes(searchText)) {
-            output.push(ustensil);
-        }
-    }
-    return output;
-}
 ///////////////////////////////////////////////////// RECHERCHE DANS CHAMP INGREDIENTS
 ingredientsInput.addEventListener('input', () => {
-    const searchedIngredients = filterByIngredients(filteredIngredients, ingredientsInput.value.toLowerCase());
+    const searchedIngredients = [];
+    for (let i = 0; i < filteredIngredients.length; i++) {
+        if (filteredIngredients[i].includes(ingredientsInput.value.toLowerCase())) {
+            searchedIngredients.push(filteredIngredients[i]);
+        }
+    }
     ingredientsBox.innerHTML = "";
     displayItems(searchedIngredients, ingredientsBox);
 })
 ///////////////////////////////////////////////////// RECHERCHE DANS CHAMP APPAREILS
 applianceInput.addEventListener('input', () => {
-    const searchedAppliance = filterByAppliance(filteredAppliance, applianceInput.value.toLowerCase());
+    const searchedAppliance = [];
+    for (let i = 0; i < filteredAppliance.length; i++) {
+        if (filteredAppliance[i].includes(applianceInput.value.toLowerCase())) {
+            searchedAppliance.push(filteredAppliance[i]);
+        }
+    }
     applianceBox.innerHTML = "";
     displayItems(searchedAppliance, applianceBox);
 })
 ///////////////////////////////////////////////////// RECHERCHE DANS CHAMP USTENSILES
 ustensilsInput.addEventListener('input', () => {
-    const searchedUstensils = filterByUstensils(filteredUstensils, ustensilsInput.value.toLowerCase());
+    const searchedUstensils = [];
+    for (let i = 0; i < filteredUstensils.length; i++) {
+        if (filteredUstensils[i].includes(ustensilsInput.value.toLowerCase())) {
+            searchedUstensils.push(filteredUstensils[i]);
+        }
+    }
     ustensilsBox.innerHTML = "";
     displayItems(searchedUstensils, ustensilsBox);
 })
