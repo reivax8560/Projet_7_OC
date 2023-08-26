@@ -1,7 +1,3 @@
-const main = document.querySelector('main');                                                // à supprimer
-const nbRecettes = document.createElement('h2');                                            // à supprimer
-main.prepend(nbRecettes);                                                                   // à supprimer
-
 ///////////////////////////////////////////////////////////////// AFFICHAGE RECETTES ////////////////////////////////////////////////////////////////
 function displayRecipes(recipes, recipesSection) {
     recipes.forEach(recipe => {
@@ -64,8 +60,6 @@ function displayRecipes(recipes, recipesSection) {
         /////////////////////////////////////////// INSERTION DU CONTENU GLOBAL
         recipesSection.append(recipeCard);
     });
-
-    nbRecettes.textContent = `${recipes.length} recettes`;                                          // à supprimer
 }
 /////////////////////////////////////////////////////////////////// AFFICHAGE ITEMS ////////////////////////////////////////////////////////////////
 function displayItems(items, itemsBox) {
