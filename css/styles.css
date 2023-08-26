@@ -66,7 +66,6 @@ header {
     position: relative;
     min-width: 150px;
     min-height: 50px;
-    /* box-sizing: border-box; */
 }
 
 /* ********************* TAG BUTTON ******************** */
@@ -86,7 +85,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* display: none; */
 }
 
 .inputBtn_ingr {
@@ -105,9 +103,6 @@ header {
 }
 
 /* ********************* TAG INPUT ******************** */
-
-/* .inputBox {
-} */
 
 .tagInput {
     color: white;
@@ -162,7 +157,6 @@ header {
     padding: 0 10px 10px 10px;
     overflow: auto;
     max-height: 265px;
-    /* max-width: 700px; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
@@ -236,6 +230,7 @@ header {
     text-align: center;
     display: none;
 }
+
 #recipes_section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -248,7 +243,6 @@ header {
     color: black;
     border-radius: 5px;
     height: 300px;
-    /* box-sizing: border-box; */
 }
 
 .picture {
@@ -263,7 +257,6 @@ header {
     background: #E7E7E7;
     border-radius: 0 0 5px 5px;
     padding: 15px 20px;
-    /* box-sizing: border-box; */
 }
 
 /*******************************/
@@ -299,9 +292,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    /* box-sizing: border-box; */
-    /* overflow: hidden;
-    text-overflow: ellipsis; */
 }
 
 .ingredientsDiv {
@@ -329,8 +319,6 @@ header {
     text-overflow: ellipsis;
     margin: 0;
     -webkit-line-clamp: 7;
-    /* white-space: nowrap; */
     -webkit-box-orient: vertical;
     display: -webkit-box;
-    /* word-break: break-all; */
 }
